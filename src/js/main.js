@@ -1,4 +1,5 @@
 const list = document.querySelector(".list-container");
+console.log(list);
 const listRow = document.querySelector(".list-row");
 const submitButton = document.querySelector(".submit");
 const searchBox = document.querySelector(".search-section");
@@ -9,12 +10,16 @@ submitButton.addEventListener("click", function () {
   if (getValue === "") {
     alert("Please Type Something");
   } else {
-    const html = `<li class="list-row">${getValue}</li>`;
-    list.insertAdjacentHTML("afterend", html);
+    const html = `<li class="list-row">${getValue} <span class="cross">&#10005;</span></li>`;
+    list.insertAdjacentHTML("beforeend", html);
     InputText.value = "";
   }
 });
 
-// listRow.addEventListener("click", function () {
-//   // listRow.classList.toggle("checked");
-// });
+list.addEventListener("click", function (e) {
+  if (e.target.tagName === "LI") {
+    e.target.classList.toggle("checked");
+  } else if (e.target.tagName === "SPAN") {
+    e.target.parentElement.remove();
+  }
+});
